@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/* &lt;CoffeeScript&gt;
+&lt;/CoffeeScript&gt; */
+<span id='analize'>/**
+</span> * @class analize
+ * 
+ * 
+ * # Lumenize Core #
+ * 
+ * Lumenize Core is a set of classes and functions that have no dependencies. It can stand alone or act as the base
+ * functionality for other packages including tzTime, and Lumenize proper.
+ * 
+ * Simple group-by, 2D pivot-table and even multi-dimensional aggregations (OLAP cube) are provided by:
+ *   * OLAPCube - Generic OLAP Cube with support for hierarchical roll-ups
+ * 
+ * Mathematical and statistical functions provided by:
+ *   * functions - count, sum, standardDeviation, percentile coverage, min, max, etc.
+ *   * distributions - Taylor approximations for F, T, and Normal distributions including some inverse and inverse-upper forms
+ *   * histogram - create a histogram of scatter data
+ *   * RandomPicker - supply a non-parametric distribution and it will randomly pick according to that. Great for
+ *     non-parametric Monte Carlo simulation
+ * 
+ * Three transformation functions are provided:
+ *   * arrayOfMaps_To_CSVStyleArray - Used to transform from record to table format
+ *   * csvStyleArray_To_ArrayOfMaps - Used to transform from table to record format
+ *   * arrayOfMaps_To_HighChartsSeries - Used to transform from record format to the format expected by the HighCharts charting library
+ * 
+ * And last, additional functionality is provided by:
+ *   * utils - utility methods used by the rest of Lumenize (type, clone, array/object functions, etc.)
+ *   * table - output Array of Maps style data as a text table
+ * 
+ */
+/* &lt;CoffeeScript&gt;
+#exports.utils = tzTime.utils
+
+datatransform = require(&#39;./src/dataTransform&#39;)
+exports.arrayOfMaps_To_CSVStyleArray = datatransform.arrayOfMaps_To_CSVStyleArray
+exports.csvStyleArray_To_ArrayOfMaps = datatransform.csvStyleArray_To_ArrayOfMaps
+exports.arrayOfMaps_To_HighChartsSeries = datatransform.arrayOfMaps_To_HighChartsSeries
+exports.csvString_To_CSVStyleArray = datatransform.csvString_To_CSVStyleArray
+exports.csvStyleArray_To_CSVString = datatransform.csvStyleArray_To_CSVString
+
+exports.functions = require(&#39;./src/functions&#39;).functions
+
+exports.histogram = require(&#39;./src/histogram&#39;).histogram
+
+exports.multiRegression = require(&#39;./src/multiRegression&#39;).multiRegression
+
+exports.table = require(&#39;./src/table&#39;).table
+
+exports.OLAPCube = require(&#39;./src/OLAPCube&#39;).OLAPCube
+
+exports.anova = require(&#39;./src/anova&#39;).anova
+
+exports.distributions = require(&#39;./src/distributions&#39;).distributions
+
+exports.BayesianClassifier = require(&#39;./src/Classifier&#39;).BayesianClassifier
+exports.Classifier = require(&#39;./src/Classifier&#39;).Classifier
+
+exports.RandomPicker = require(&#39;./src/RandomPicker&#39;).RandomPicker
+
+exports.utils = require(&#39;./src/utils&#39;)
+
+&lt;/CoffeeScript&gt; */</pre>
+</body>
+</html>

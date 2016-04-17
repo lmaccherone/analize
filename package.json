@@ -1,0 +1,66 @@
+{
+  "name": "analize",
+  "version": "1.2.0",
+  "description": "Core for Lumenize - Illuminating the forest AND the trees in your data.",
+  "keywords": [
+    "charting",
+    "chart",
+    "infographics",
+    "software engineering",
+    "date",
+    "time",
+    "OLAP",
+    "business intelligence",
+    "BI",
+    "statistics",
+    "bayes",
+    "bayesian",
+    "bayesian classifier",
+    "histogram"
+  ],
+  "author": {
+    "name": "Larry Maccherone",
+    "url": "http://maccherone.com"
+  },
+  "homepage": "https://github.com/lmaccherone/analize",
+  "engines": {
+    "node": "^5.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/lmaccherone/analize.git"
+  },
+  "preferGlobal": false,
+  "dependencies": {
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "async": "~0.2.9",
+    "bower": "1.4.x",
+    "brfs": "^1.4.3",
+    "browserify": "^4.2.0",
+    "coffee-coverage": "^0.6.2",
+    "coffee-script": "^1.9.3",
+    "coffeedoctest": "^0.5.0",
+    "coveralls": "^2.11.2",
+    "fileify-lm": "~0.3.1",
+    "find-remove": "^0.2.5",
+    "istanbul": "^0.3.17",
+    "jsduckify": "^0.3.0",
+    "lodash": "^4.5.1",
+    "marked": "0.2.x",
+    "nodeunit": "^0.9.1",
+    "orchestrator": "^0.3.7",
+    "uglify-js": "2.2.x",
+    "wrench": "1.4.x"
+  },
+  "scripts": {
+    "test": "cake testall"
+  },
+  "browserify": {
+    "transform": [
+      "brfs"
+    ]
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "analize",
+  "version": "1.2.0",
+  "homepage": "https://github.com/lmaccherone/analize",
+  "authors": [
+    "Larry Maccherone"
+  ],
+  "main": "deploy/analize-min.js",
+  "license": "MIT",
+  "ignore": [
+    "/*",
+    "!deploy/*"
+  ]
+}
