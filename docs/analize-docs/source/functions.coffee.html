@@ -17,6 +17,7 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">/* &lt;CoffeeScript&gt;
 utils = require(&#39;./utils&#39;)
+_ = require(&#39;underscore&#39;)
 
 &lt;/CoffeeScript&gt; */
 <span id='analize-functions'>/**
@@ -247,10 +248,28 @@ functions.values = (values, oldResult, newValues) -&gt;
   if oldResult?
     return oldResult.concat(newValues)
   return values
-#  temp = []
-#  for v in values
-#    temp.push(v)
-#  return temp
+
+&lt;/CoffeeScript&gt; */
+<span id='analize-functions-static-method-numbers'>/**
+</span> * @method numbers
+ * @member analize.functions
+ * @static
+ * @param {Object[]} [values] Must either provide values or oldResult and newValues
+ * @param {Number} [oldResult] for incremental calculation
+ * @param {Number[]} [newValues] for incremental calculation
+ * @return {Array} All non-null values
+ */
+/* &lt;CoffeeScript&gt;
+functions.numbers = (values, oldResult, newValues) -&gt;
+  if oldResult?
+    numbers = functions.numbers(newValues)
+    return oldResult.concat(numbers)
+  else
+    numbers = []
+    for value in values
+      if value is Number(value) and not _.isNaN(value) and value isnt Infinity and value isnt -Infinity
+        numbers.push(value)
+    return numbers
 
 &lt;/CoffeeScript&gt; */
 <span id='analize-functions-static-method-uniqueValues'>/**
