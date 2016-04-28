@@ -1,4 +1,5 @@
 utils = require('./utils')
+_ = require('underscore')
 
 ###
 @class functions
@@ -197,10 +198,25 @@ functions.values = (values, oldResult, newValues) ->
   if oldResult?
     return oldResult.concat(newValues)
   return values
-#  temp = []
-#  for v in values
-#    temp.push(v)
-#  return temp
+
+###
+@method numbers
+@static
+@param {Object[]} [values] Must either provide values or oldResult and newValues
+@param {Number} [oldResult] for incremental calculation
+@param {Number[]} [newValues] for incremental calculation
+@return {Array} All non-null values
+###
+functions.numbers = (values, oldResult, newValues) ->
+  if oldResult?
+    numbers = functions.numbers(newValues)
+    return oldResult.concat(numbers)
+  else
+    numbers = []
+    for value in values
+      if value is Number(value) and not _.isNaN(value) and value isnt Infinity and value isnt -Infinity
+        numbers.push(value)
+    return numbers
 
 ###
 @method uniqueValues

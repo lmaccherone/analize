@@ -326,3 +326,9 @@ exports.functionsTest =
     test.equal(functions.standardDeviation([null, null]), 0)
     test.equal(functions.standardDeviation([null, 4, 2]), 2)
     test.done()
+    
+  testNumbers: (test) ->
+    values = [2, null, NaN, undefined, 4, 1/0, -1/0, 8]
+    test.deepEqual(functions.numbers(values), [2, 4, 8])
+    test.deepEqual(functions.numbers(values, [2], [null, NaN, undefined, 4, 1/0, -1/0, 8]), [2, 4, 8])
+    test.done()

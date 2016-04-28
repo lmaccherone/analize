@@ -8,8 +8,8 @@ src/*.js
 test/*.map
 test/*.js
 test/*.js.map
-lumenize.js
-lumenize.map
-lumenize.js.map
+analize.js
+analize.map
+analize.js.map
 play
 coverage

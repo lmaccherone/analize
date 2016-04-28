@@ -43,3 +43,24 @@ exports.tableTest =
     test.deepEqual(actual, expected)
 
     test.done()
+
+  testNarrowColumns: (test) ->
+    t = [
+      {c: 'h', c2: 12, col3: true},
+      {c: 'g', c2: 40, col3: false},
+      {c: 'y', c2: 10, col3: true},
+    ]
+
+    actual = table.toString(t, null, 'c2', true)
+
+    expected = '''
+      | c   | c2  | col3  |
+      | --- | --- | ----- |
+      | g   | 40  | false |
+      | h   | 12  | true  |
+      | y   | 10  | true  |
+    '''
+
+    test.deepEqual(actual, expected)
+
+    test.done()

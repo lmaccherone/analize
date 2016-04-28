@@ -198,6 +198,33 @@ exports.histogramTest =
     test.equal(h[0].count, 0)
 
     test.done()
+    
+  testNullNaNEtc: (test) ->
+    grades = [
+      {name: 'Joe', average: 105}, # extra credit
+      {name: 'Jeff', average: NaN}, # missed it by that much
+      {name: 'John', average: 1/0},
+      {name: 'Jess', average: -1/0},
+      {name: 'Joseph', average: null},
+      {name: 'Julie', average: undefined},
+      {name: 'Juan', average: 75},
+      {name: 'Jill', average: 73},
+      {name: 'Jon', average: 71},
+      {name: 'Jorge', average: 32}
+    ]
+
+    buckets = histogram.bucketsPercentile(grades, 'average')
+    for bucket, index in buckets
+      if index is 0
+        test.ok(! bucket.startOn?)
+      else
+        test.equal(utils.type(bucket.startOn), 'number')
+      if index is 99
+        test.ok(! bucket.endBelow?)
+      else
+        test.equal(utils.type(bucket.endBelow), 'number')
+    
+    test.done()
 
   testPercentileExample: (test) ->
     grades = [
@@ -217,7 +244,6 @@ exports.histogramTest =
       {name: 'Jorge', average: 32}
     ]
 
-    {histogram} = require('../')
     buckets = histogram.bucketsPercentile(grades, 'average')
 
     getGrade = (average, buckets) ->

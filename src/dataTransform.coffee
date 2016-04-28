@@ -23,7 +23,6 @@ csvStyleArray_To_ArrayOfMaps = (csvStyleArray, rowKeys) ->
   to an Array of Maps like this:
 
       console.log(csvStyleArray_To_ArrayOfMaps(csvStyleArray))
-
       # [ { column1: 1, column2: 2 },
       #   { column1: 3, column2: 4 },
       #   { column1: 5, column2: 6 } ]

@@ -194,7 +194,7 @@ class OLAPCube
         {date: '2012-02-15T12:34:56.789Z', value: 50},
       ]
 
-      {Time} = require('../')
+      {Time} = require('tzTime')
 
       config =
         deriveFieldsOnInput: [{

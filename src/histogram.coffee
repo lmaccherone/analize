@@ -86,6 +86,7 @@ setParameters = (rows, valueField, firstStartOn, lastEndBelow, bucketCount, sign
     values = (row[valueField] for row in rows)
   else
     values = rows
+  values = functions.numbers(values)
   {targetBucketCount, min, max} = getBucketCountMinMax(values)
   unless bucketCount?
     bucketCount = targetBucketCount

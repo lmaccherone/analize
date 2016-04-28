@@ -1,19 +1,20 @@
 [
     {
-        "name": "Lumenize Core",
+        "name": "Analize - Lumenize Core",
         "groups": [
             {
                 "name": "Core",
                 "classes": [
-                    "*.histogram",
-                    "*.OLAPCube",
-                    "*.table",
+                    "*.anova",
+                    "*.BayesianClassifier",
                     "*.correlate",
                     "*.dataTransform",
-                    "*.BayesianClassifier",
-                    "*.functions",
                     "*.distributions",
-                    "*.RandomPicker"
+                    "*.functions",
+                    "*.histogram",
+                    "*.OLAPCube",
+                    "*.RandomPicker",
+                    "*.table"
                 ]
             }
         ]

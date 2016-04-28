@@ -44,7 +44,7 @@ table.toString = (rows, fields, sortBy, descending = false) ->
       fields.push(key)
   maxWidths = []
   for field, index in fields
-    maxWidths.push(field.length)  # !TODO: Support for Markdown style justification |:---:| or |---:| and number formatting
+    maxWidths.push(Math.max(field.length, 3))  # !TODO: Support for Markdown style justification |:---:| or |---:| and number formatting
     for row in rows
       maxWidths[index] = Math.max(maxWidths[index], row[field]?.toString().length or 0)
 

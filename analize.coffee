@@ -46,6 +46,10 @@ exports.OLAPCube = require('./src/OLAPCube').OLAPCube
 
 exports.anova = require('./src/anova').anova
 
+correlate = require('./src/correlate')
+exports.correlate = correlate.correlate
+exports.correlationTable = correlate.correlationTable
+
 exports.distributions = require('./src/distributions').distributions
 
 exports.BayesianClassifier = require('./src/Classifier').BayesianClassifier
@@ -54,3 +58,5 @@ exports.Classifier = require('./src/Classifier').Classifier
 exports.RandomPicker = require('./src/RandomPicker').RandomPicker
 
 exports.utils = require('./src/utils')
+
+exports.top = require('./src/top').top

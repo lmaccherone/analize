@@ -492,7 +492,7 @@ class BayesianClassifier extends Classifier
 
     @param {Object} [meta] An optional parameter that will be added to the serialized output and added to the meta field
       within the deserialized Classifier
-    @return {Object} Returns an Ojbect representing the state of the Classifier. This Object is suitable for saving to
+    @return {Object} Returns an Object representing the state of the Classifier. This Object is suitable for saving to
       an object store. Use the static method `newFromSavedState()` with this Object as the parameter to reconstitute the Classifier.
     ###
     out =

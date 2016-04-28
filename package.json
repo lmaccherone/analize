@@ -1,7 +1,8 @@
 {
   "name": "analize",
   "version": "1.2.0",
-  "description": "Core for Lumenize - Illuminating the forest AND the trees in your data.",
+  "main": "./analize",
+  "description": "Core for Lumenize - Illuminating the forest AND the trees in your data",
   "keywords": [
     "charting",
     "chart",
@@ -51,6 +52,7 @@
     "marked": "0.2.x",
     "nodeunit": "^0.9.1",
     "orchestrator": "^0.3.7",
+    "tztime": "^1.0.2",
     "uglify-js": "2.2.x",
     "wrench": "1.4.x"
   },

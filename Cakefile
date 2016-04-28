@@ -118,7 +118,7 @@ task('build', 'Build with browserify and place in ./deploy', () ->
   runSyncNoExit('coffee', ['--compile', 'analize.coffee', 'src'])
 
   b = browserify()
-  b.require('./index', {expose: 'analize'})
+  b.require('./analize', {expose: 'analize'})
   b.transform('brfs')
   b.bundle((err, buf) ->
     fileString = buf.toString('utf8')
