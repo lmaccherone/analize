@@ -1,6 +1,7 @@
 functions = require('./functions').functions
 utils = require('./utils')
 OLAPCube = require('./OLAPCube').OLAPCube
+_ = require('lodash')
 
 class Classifier
   ###
@@ -417,11 +418,14 @@ class BayesianClassifier extends Classifier
             denominator = denominatorCell._count
           else
             denominator = 0
-#            throw new Error("No values for #{feature.field}=#{bin.value} and #{@outputField}=#{outputValue}.")
+#            console.error("Warning: No values for #{feature.field}=#{bin.value} and #{@outputField}=#{outputValue}.")
           filter[@outputField] = outputValue
           numeratorCell = featureCube.getCell(filter)
           numerator = numeratorCell?._count | 0
           bin.probabilities[outputValue] = numerator / denominator
+          if _.isNaN(bin.probabilities[outputValue])
+            bin.probabilities[outputValue] = 0
+
 
     # calculate accuracy for training set
     trainingSet = utils.clone(userSuppliedTrainingSet)  # !TODO: Upgrade to calculate off of a validation set if provided
