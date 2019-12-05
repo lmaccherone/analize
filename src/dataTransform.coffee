@@ -23,9 +23,11 @@ csvStyleArray_To_ArrayOfMaps = (csvStyleArray, rowKeys) ->
   to an Array of Maps like this:
 
       console.log(csvStyleArray_To_ArrayOfMaps(csvStyleArray))
-      # [ { column1: 1, column2: 2 },
+      # [ 
+      #   { column1: 1, column2: 2 },
       #   { column1: 3, column2: 4 },
-      #   { column1: 5, column2: 6 } ]
+      #   { column1: 5, column2: 6 } 
+      # ]
   ###
   arrayOfMaps = []
   if rowKeys?
@@ -65,10 +67,12 @@ arrayOfMaps_To_CSVStyleArray = (arrayOfMaps, fields) ->
 
       console.log(arrayOfMaps_To_CSVStyleArray(arrayOfMaps))
 
-      # [ [ 'column1', 'column2' ],
+      # [ 
+      #   [ 'column1', 'column2' ],
       #   [ 10000, 20000 ],
       #   [ 30000, 40000 ],
-      #   [ 50000, 60000 ] ]
+      #   [ 50000, 60000 ] 
+      # ]
   ###
   if arrayOfMaps.length == 0
     return []
@@ -116,9 +120,11 @@ arrayOfMaps_To_HighChartsSeries = (arrayOfMaps, config) ->
   and extracts the data into seperate series
 
       console.log(arrayOfMaps_To_HighChartsSeries(arrayOfMaps, config))
-      # [ { name: 'Series 1', data: [ 8, 2, 1 ], yAxis: 1 },
+      # [ 
+      #   { name: 'Series 1', data: [ 8, 2, 1 ], yAxis: 1 },
       #   { name: 'Series 2', data: [ 5, 3, 2 ] },
-      #   { name: 'Series3', data: [ 10, null, 40 ] } ]
+      #   { name: 'Series3', data: [ 10, null, 40 ] } 
+      # ]
 
   Notice how the extra fields from the series array are included in the output. Also, notice how the missing second
   value for Series3 was replaced with a null. HighCharts will skip right over this for category charts as you would

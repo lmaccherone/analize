@@ -19,7 +19,7 @@ table.toString = (rows, fields, sortBy, descending = false) ->
   ###
   @method toString
   @param {Object[]} rows
-  @param {Object} [fields] If not provided, it will use the fields found in the first row
+  @param {Object} [fields = <all in 1st row>] If not provided, it will use the fields found in the first row
   @param {String} [sortBy] If provided, it will sort the table by this field before returning
   @param {Boolean} [descending = false] By default, the sort will be ascending, setting this to true will sort descending
   @return {String} Returns a string for the table in Markdown format

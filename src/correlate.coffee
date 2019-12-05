@@ -1,4 +1,32 @@
-correlate = (points, xField = 'x', yField = 'y') ->
+
+###
+@class correlate
+###
+correlate = {}
+
+correlate.correlate = (points, xField = 'x', yField = 'y') ->
+  ###
+  @method correlate
+  @param {Object[]} points
+  @param {String} [xField = 'x'] Will consider the field named xField as the x value in the correlation
+  @param {String} [yField = 'y'] Will consider the field named yField as the x value in the correlation
+  @return {Object} Returns an object with all the calculated correlation values {intercept, slope, rSquared, description, correlation}
+
+      data = [
+        {col1: 1, col2: 4},
+        {col1: 2, col2: 8},
+      ]
+
+      console.log(require('../').correlate.correlate(data, 'col2', 'col1'))
+      # {
+      #   intercept: 0,
+      #   slope: 0.25,
+      #   rSquared: 1,
+      #   description: "y = 0.25 * x + 0 with R^2 of 1 and Pearson's correlation coefficient of 1",
+      #   correlation: 1
+      # }
+
+  ###
   n = points.length
 
   sumX  = 0
@@ -19,7 +47,6 @@ correlate = (points, xField = 'x', yField = 'y') ->
 
   intercept = ((sumY * sumX2) - (sumX * sumXY)) / div
   slope = ((n * sumXY) - (sumX * sumY)) / div
-  rSquared = Math.pow((n * sumXY - sumX * sumY) / Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY)), 2)
 
   num = sumXY - (sumX * sumY / n)
   den = Math.sqrt((sumX2 - Math.pow(sumX, 2) / n) * (sumY2 - Math.pow(sumY, 2) / n))
@@ -28,19 +55,53 @@ correlate = (points, xField = 'x', yField = 'y') ->
   else
     correlation = num / den
 
+  rSquared = Math.pow(correlation, 2)
+
   description = "y = #{slope} * x + #{intercept} with R^2 of #{rSquared} and Pearson's correlation coefficient of #{correlation}"
 
   return {intercept, slope, rSquared, description, correlation}
 
-correlationTable = (data, inputFields, outcomeFields) ->
+correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = false) ->
+  ###
+  @method correlationTable
+  @param {Object[]} data
+  @param {String} [inputFields = <all fields in first row>] Defaults to all fields in the first row
+  @param {String} [outcomeFields = <all fields in first row>] Defaults to all fields in the first row
+  @param {Boolean} [useRSquared = false] By default, this will output the Pearson's correlation value (aka R). Setting this to `true` will cause it to output R^2
+  @return {Object[]} Returns an Array of Objects with all the calculated correlation values
+
+      data = [
+        {col1: 1, col2: 4, col3: -10},
+        {col1: 2, col2: 8, col3: -20},
+        {col1: 3, col2: 15, col3: -30},
+      ]
+
+      console.log(require('../').correlate.correlationTable(data))
+      # [
+      #   { input: 'col1', col1: 1, col2: 0.987829161147262, col3: -1 },
+      #   { 
+      #     input: 'col2', 
+      #     col1: 0.987829161147262, 
+      #     col2: 1, 
+      #     col3: -0.987829161147262
+      #   },
+      #   { input: 'col3', col1: -1, col2: -0.987829161147262, col3: 1 }
+      # ]
+
+  ###
+  fields = Object.keys(data[0])
+  inputFields = inputFields or fields
+  outcomeFields = outcomeFields or fields
   table = [] 
   for inputField in inputFields
-    row = {Input: inputField}
+    row = {input: inputField}
     for outcomeField in outcomeFields
-      correlationResult = correlate(data, outcomeField, inputField)
-      row[outcomeField] = correlationResult.correlation
+      correlationResult = correlate.correlate(data, outcomeField, inputField)
+      if useRSquared
+        row[outcomeField] = correlationResult.rSquared
+      else
+        row[outcomeField] = correlationResult.correlation
     table.push(row)
   return table
       
 exports.correlate = correlate
-exports.correlationTable = correlationTable
