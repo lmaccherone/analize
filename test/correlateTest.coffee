@@ -1,4 +1,4 @@
-{correlate} = require('../')
+{correlate, table} = require('../')
 
 exports.correlateTest =
 
@@ -29,14 +29,16 @@ exports.correlateTest =
     ]
 
     actual = correlate.correlationTable(data)
-    expected = [
-      {input: 'col1', col1: 1, col2: 0.987829161147262, col3: -1},
-      {input: 'col2', col1: 0.987829161147262, col2: 1, col3: -0.987829161147262},
-      {input: 'col3', col1: -1, col2: -0.987829161147262, col3: 1}
-    ]
+    expected = '''
+      | input |  col1 |  col2 |  col3 |
+      | ----- | -----:| -----:| -----:|
+      | col1  |  1.00 |  0.99 | -1.00 |
+      | col2  |  0.99 |  1.00 | -0.99 |
+      | col3  | -1.00 | -0.99 |  1.00 |
+    '''
     test.deepEqual(actual, expected)
 
-    actual = correlate.correlationTable(data, null, null, true)
+    actual = correlate.correlationTable(data, null, null, true, true)
     expected = [
       {input: 'col1', col1: 1, col2: 0.9758064516129034, col3: 1},
       {input: 'col2', col1: 0.9758064516129034, col2: 1, col3: 0.9758064516129034},
@@ -44,7 +46,7 @@ exports.correlateTest =
     ]
     test.deepEqual(actual, expected)
 
-    actual = correlate.correlationTable(data, ['col1', 'col2'], ['col2', 'col3'])
+    actual = correlate.correlationTable(data, ['col1', 'col2'], ['col2', 'col3'], null, true)
     expected = [
       {input: 'col1', col2: 0.987829161147262, col3: -1},
       {input: 'col2', col2: 1, col3: -0.987829161147262}

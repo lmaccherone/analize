@@ -1,3 +1,4 @@
+tableFormatter = require('./table')
 
 ###
 @class correlate
@@ -61,13 +62,14 @@ correlate.correlate = (points, xField = 'x', yField = 'y') ->
 
   return {intercept, slope, rSquared, description, correlation}
 
-correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = false) ->
+correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = false, rawOutput = false) ->
   ###
   @method correlationTable
   @param {Object[]} data
   @param {String} [inputFields = <all fields in first row>] Defaults to all fields in the first row
   @param {String} [outcomeFields = <all fields in first row>] Defaults to all fields in the first row
-  @param {Boolean} [useRSquared = false] By default, this will output the Pearson's correlation value (aka R). Setting this to `true` will cause it to output R^2
+  @param {Boolean} [useRSquared = false] By default, the Pearson's correlation value (aka R) will be output. Setting this to `true` will cause it to output R^2
+  @param {Boolean} [rawOutput = false] By default, the output will be a markdown formatted table. Setting this to `true` will cause it to output an Array of Objects
   @return {Object[]} Returns an Array of Objects with all the calculated correlation values
 
       data = [
@@ -77,16 +79,11 @@ correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = fa
       ]
 
       console.log(require('../').correlate.correlationTable(data))
-      # [
-      #   { input: 'col1', col1: 1, col2: 0.987829161147262, col3: -1 },
-      #   { 
-      #     input: 'col2', 
-      #     col1: 0.987829161147262, 
-      #     col2: 1, 
-      #     col3: -0.987829161147262
-      #   },
-      #   { input: 'col3', col1: -1, col2: -0.987829161147262, col3: 1 }
-      # ]
+      # | input |  col1 |  col2 |  col3 |
+      # | ----- | -----:| -----:| -----:|
+      # | col1  |  1.00 |  0.99 | -1.00 |
+      # | col2  |  0.99 |  1.00 | -0.99 |
+      # | col3  | -1.00 | -0.99 |  1.00 |
 
   ###
   fields = Object.keys(data[0])
@@ -102,6 +99,9 @@ correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = fa
       else
         row[outcomeField] = correlationResult.correlation
     table.push(row)
-  return table
+  if rawOutput
+    return table
+  else
+    return tableFormatter.table.toString(table, null, null, null, 2)
       
 exports.correlate = correlate

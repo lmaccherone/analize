@@ -15,7 +15,7 @@ table.padToWidth = (s, width, padCharacter = ' ', rightPad = false) ->
   else
     return padding + s
 
-table.toString = (rows, fields, sortBy, descending = false) ->
+table.toString = (rows, fields, sortBy, descending = false, decimals = false) ->
   ###
   @method toString
   @param {Object[]} rows
@@ -42,6 +42,16 @@ table.toString = (rows, fields, sortBy, descending = false) ->
     fields = []
     for key, value of rows[0]
       fields.push(key)
+
+  numberColumns = new Set()
+  if decimals
+    for row in rows
+      for key, value of row
+        if typeof(value) is 'number'
+          numberColumns.add(key)
+          s = value.toFixed(decimals)
+          row[key] = s
+
   maxWidths = []
   for field, index in fields
     maxWidths.push(Math.max(field.length, 3))  # !TODO: Support for Markdown style justification |:---:| or |---:| and number formatting
@@ -58,18 +68,20 @@ table.toString = (rows, fields, sortBy, descending = false) ->
   s = '|'
   for field, index in fields
     s += ' '
-    s += table.padToWidth(field, maxWidths[index], undefined, true) + ' |'  # !TODO: Change undefined for justification
+    s += table.padToWidth(field, maxWidths[index], undefined, !numberColumns.has(field)) + ' |'  # !TODO: Change undefined for justification
 
   s += '\n|'
   for field, index in fields
     s += ' '
-    s += table.padToWidth('', maxWidths[index], '-', true) + ' |'  # !TODO: Add colons for justification
+    s += table.padToWidth('', maxWidths[index], '-', true)
+    s += if numberColumns.has(field) then ':' else ' '
+    s += '|'
 
   for row in sortedRows
     s += '\n|'
     for field, index in fields
       s += ' '
-      s += table.padToWidth(row[field]?.toString() or '', maxWidths[index], undefined, true) + ' |'  # !TODO: Change undefined for justification
+      s += table.padToWidth(row[field]?.toString() or '', maxWidths[index], undefined, !numberColumns.has(field)) + ' |'  # !TODO: Change undefined for justification
 
   return s
 

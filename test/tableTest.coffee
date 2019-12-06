@@ -21,6 +21,26 @@ exports.tableTest =
 
     test.deepEqual(actual, expected)
 
+    t = [
+      {col1: 'hello', col2: 120.67, col3: true},
+      {col1: 'hello', col2: 120, col3: -1234},
+      {col1: 'goodbye', col2: .99, col3: false},
+      {col1: 'yep', col2: -0.9, col3: true},
+    ]
+
+    actual = table.toString(t, null, null, null, 2)
+
+    expected = '''
+      | col1    |   col2 |     col3 |
+      | ------- | ------:| --------:|
+      | hello   | 120.67 |     true |
+      | hello   | 120.00 | -1234.00 |
+      | goodbye |   0.99 |    false |
+      | yep     |  -0.90 |     true |
+    '''
+
+    test.deepEqual(actual, expected)
+
     test.done()
 
   testNullAndMissing: (test) ->
