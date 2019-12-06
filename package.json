@@ -50,7 +50,7 @@
     "jsduck": "^1.1.2",
     "jsduckify": "^0.3.0",
     "lodash": "^4.5.1",
-    "marked": "0.2.x",
+    "marked": "0.3.x",
     "nodeunit": "^0.9.1",
     "orchestrator": "^0.3.7",
     "tztime": "^1.0.2",
