@@ -16,6 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">/* &lt;CoffeeScript&gt;
+tableFormatter = require(&#39;./table&#39;)
 
 &lt;/CoffeeScript&gt; */
 <span id='analize-correlate'>/**
@@ -84,7 +85,7 @@ correlate.correlate = (points, xField = &#39;x&#39;, yField = &#39;y&#39;) -&gt;
 
   return {intercept, slope, rSquared, description, correlation}
 
-correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = false) -&gt;
+correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = false, rawOutput = false) -&gt;
 &lt;/CoffeeScript&gt; */
 <span id='analize-correlate-method-correlationTable'>  /**
 </span>   * @method correlationTable
@@ -92,8 +93,9 @@ correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = fa
    * @param {Object[]} data
    * @param {String} [inputFields = &lt;all fields in first row&gt;] Defaults to all fields in the first row
    * @param {String} [outcomeFields = &lt;all fields in first row&gt;] Defaults to all fields in the first row
-   * @param {Boolean} [useRSquared = false] By default, this will output the Pearson&#39;s correlation value (aka R). Setting this to `true` will cause it to output R^2
-   * @return {Object[]} Returns an Array of Objects with all the calculated correlation values
+   * @param {Boolean} [useRSquared = false] By default, the Pearson&#39;s correlation value (aka R) will be output. Setting this to `true` will cause it to output R^2
+   * @param {Boolean} [rawOutput = false] By default, the output will be a markdown formatted table. Setting this to `true` will cause it to output an Array of Objects
+   * @return {String | Object[]} Returns all the calculated correlation values
    * 
    *     data = [
    *       {col1: 1, col2: 4, col3: -10},
@@ -102,16 +104,11 @@ correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = fa
    *     ]
    * 
    *     console.log(require(&#39;../&#39;).correlate.correlationTable(data))
-   *     # [
-   *     #   { input: &#39;col1&#39;, col1: 1, col2: 0.987829161147262, col3: -1 },
-   *     #   { 
-   *     #     input: &#39;col2&#39;, 
-   *     #     col1: 0.987829161147262, 
-   *     #     col2: 1, 
-   *     #     col3: -0.987829161147262
-   *     #   },
-   *     #   { input: &#39;col3&#39;, col1: -1, col2: -0.987829161147262, col3: 1 }
-   *     # ]
+   *     # | input |  col1 |  col2 |  col3 |
+   *     # | ----- | -----:| -----:| -----:|
+   *     # | col1  |  1.00 |  0.99 | -1.00 |
+   *     # | col2  |  0.99 |  1.00 | -0.99 |
+   *     # | col3  | -1.00 | -0.99 |  1.00 |
    * 
    */
 /* &lt;CoffeeScript&gt;
@@ -128,7 +125,10 @@ correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = fa
       else
         row[outcomeField] = correlationResult.correlation
     table.push(row)
-  return table
+  if rawOutput
+    return table
+  else
+    return tableFormatter.table.toString(table, null, null, null, 2)
       
 exports.correlate = correlate
 &lt;/CoffeeScript&gt; */</pre>

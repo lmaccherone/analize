@@ -70,7 +70,7 @@ correlate.correlationTable = (data, inputFields, outcomeFields, useRSquared = fa
   @param {String} [outcomeFields = <all fields in first row>] Defaults to all fields in the first row
   @param {Boolean} [useRSquared = false] By default, the Pearson's correlation value (aka R) will be output. Setting this to `true` will cause it to output R^2
   @param {Boolean} [rawOutput = false] By default, the output will be a markdown formatted table. Setting this to `true` will cause it to output an Array of Objects
-  @return {Object[]} Returns an Array of Objects with all the calculated correlation values
+  @return {String | Object[]} Returns all the calculated correlation values
 
       data = [
         {col1: 1, col2: 4, col3: -10},

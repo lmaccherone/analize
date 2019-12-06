@@ -68,6 +68,7 @@ And call it like this.
 
 ## Changelog ##
 
+* 2.0.0 - 2018-12-06 - Updated table formatting and correlationTable functionality
 * 1.2.0 - 2016-04-28 - Initial release broken out from Lumenize
 
 ## MIT License ##

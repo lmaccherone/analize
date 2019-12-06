@@ -35,7 +35,7 @@ table.padToWidth = (s, width, padCharacter = &#39; &#39;, rightPad = false) -&gt
   else
     return padding + s
 
-table.toString = (rows, fields, sortBy, descending = false) -&gt;
+table.toString = (rows, fields, sortBy, descending = false, decimals = false) -&gt;
 &lt;/CoffeeScript&gt; */
 <span id='analize-table-method-toString'>  /**
 </span>   * @method toString
@@ -65,6 +65,16 @@ table.toString = (rows, fields, sortBy, descending = false) -&gt;
     fields = []
     for key, value of rows[0]
       fields.push(key)
+
+  numberColumns = new Set()
+  if decimals
+    for row in rows
+      for key, value of row
+        if typeof(value) is &#39;number&#39;
+          numberColumns.add(key)
+          s = value.toFixed(decimals)
+          row[key] = s
+
   maxWidths = []
   for field, index in fields
     maxWidths.push(Math.max(field.length, 3))  # !TODO: Support for Markdown style justification |:---:| or |---:| and number formatting
@@ -81,18 +91,20 @@ table.toString = (rows, fields, sortBy, descending = false) -&gt;
   s = &#39;|&#39;
   for field, index in fields
     s += &#39; &#39;
-    s += table.padToWidth(field, maxWidths[index], undefined, true) + &#39; |&#39;  # !TODO: Change undefined for justification
+    s += table.padToWidth(field, maxWidths[index], undefined, !numberColumns.has(field)) + &#39; |&#39;  # !TODO: Change undefined for justification
 
   s += &#39;\n|&#39;
   for field, index in fields
     s += &#39; &#39;
-    s += table.padToWidth(&#39;&#39;, maxWidths[index], &#39;-&#39;, true) + &#39; |&#39;  # !TODO: Add colons for justification
+    s += table.padToWidth(&#39;&#39;, maxWidths[index], &#39;-&#39;, true)
+    s += if numberColumns.has(field) then &#39;:&#39; else &#39; &#39;
+    s += &#39;|&#39;
 
   for row in sortedRows
     s += &#39;\n|&#39;
     for field, index in fields
       s += &#39; &#39;
-      s += table.padToWidth(row[field]?.toString() or &#39;&#39;, maxWidths[index], undefined, true) + &#39; |&#39;  # !TODO: Change undefined for justification
+      s += table.padToWidth(row[field]?.toString() or &#39;&#39;, maxWidths[index], undefined, !numberColumns.has(field)) + &#39; |&#39;  # !TODO: Change undefined for justification
 
   return s
 
