@@ -36,7 +36,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "async": "~0.2.9",
+    "async": "~2.6.4",
     "bower": "1.4.x",
     "brfs": "^1.4.3",
     "browserify": "^4.2.0",
