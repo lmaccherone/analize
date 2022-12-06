@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "async": "~0.2.9",
-    "bower": "1.4.x",
+    "bower": "1.8.x",
     "brfs": "^1.4.3",
     "browserify": "^4.2.0",
     "coffee-coverage": "^0.6.2",
